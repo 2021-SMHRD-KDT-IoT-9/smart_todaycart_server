@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.iot.mapper.AdminMapper">
+<insert id="register" parameterType="com.smhrd.iot.domain.manager">
+	INSERT INTO manager VALUES (#{manager_id}, #{manager_name}, #{manager_num}, #{manager_pw}, #{pw_check})
+</insert>
+<select id="login" parameterType="com.smhrd.iot.domain.manager" resultType="int">
+	SELECT count(*) FROM manager WHERE manager_id = #{manager_id} AND manager_pw = #{manager_pw}	
+</select>
+<select id="showMember" resultType="com.smhrd.iot.domain.member_info">
+	SELECT member_id, member_name, member_tel, member_add FROM MEMBER_INFO
+</select>
+<delete id="deleteMember" parameterType="String">
+	delete from MEMBER_INFO where member_id=#{member_id}
+</delete>
+<!--<select id="showCallList" parameterType="com.smhrd.iot.domain.member_info, com.smhrd.iot.domain.cart_info, com.smhrd.iot.domain.before_product" resultType="com.smhrd.iot.domain.callList">
+	SELECT CI.CART_ID, CI.MEMBER_ID, MI.MEMBER_TEL, BP.P_LOC
+	FROM CART_INFO CI, BEFORE_PRODUCT BP
+	JOIN MEMBER_INFO MI ON CI.MEMBER_ID = MI.MEMBER_ID 
+</select>  -->
+
+</mapper>
