@@ -13,6 +13,7 @@ import com.smhrd.iot.domain.member_info;
 
 @Mapper
 public interface AdminMapper {
+	
 	public void register(manager m);
 	
 	public int login(manager m);

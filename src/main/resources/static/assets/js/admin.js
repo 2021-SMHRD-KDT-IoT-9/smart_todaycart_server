@@ -29,6 +29,39 @@ function loginCheck() {
   });
 }
 
+//회원가입
+function register(){
+	console.log("콘솔확인")
+	  var manager_id = document.getElementById('manager_id').value;
+	  var manager_name = document.getElementById('manager_name').value;
+	  var manager_num = document.getElementById('manager_num').value;
+      var manager_pw = document.getElementById('manager_pw').value;
+      var pw_check = document.getElementById('pw_check').value;
+  
+  var manager = {
+    manager_id: manager_id,
+    manager_name: manager_name,
+    manager_num: manager_num,
+    manager_pw: manager_pw,
+    pw_check: pw_check
+  };
+	
+	  $.ajax({
+    url: "registerCheck", 
+    type: "POST",
+    data: JSON.stringify(manager),
+    contentType: "application/json",
+    success: function(response) {
+      // Login successful
+      alert("회원가입 성공");
+      window.location.href = "login"; // 
+    },
+    error: function(xhr, status, error) {
+      // Login failed
+      alert("회원가입 실패");
+    }
+  });
+}
 
 
 

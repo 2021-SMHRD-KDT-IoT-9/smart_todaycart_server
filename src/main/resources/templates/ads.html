@@ -1,4 +1,4 @@
-<!--
+ <!--
 
 =========================================================
 * Argon Dashboard - v1.1.2
@@ -31,6 +31,7 @@
   <link href="assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+   <script type="text/javascript" src="assets/js/ads.js"></script>
 </head>
 
 <body class="">
@@ -257,7 +258,8 @@
                       <input type="file" class="form-control form-control-alternative" id="input-imageUpload" name="imageUpload">
                       </div>
                       <div>
-                        <a href="#!" class="btn btn-sm btn-warning float-lg-right " onclick="uploadData()">등록하기</a>
+                        <a href="#!" id="submit-button" class="btn btn-sm btn-warning float-lg-right" onclick="insertTimeAds()">등록하기</a>
+                        
                       </div>
                     </div>
                   </div>
@@ -267,17 +269,17 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-price">광고 이름</label>
-                        <input type="text" id="input-price" class="form-control form-control-alternative" placeholder="ex_맞춤 광고">
+                        <label class="form-control-label" for="input-price1">광고 이름</label>
+                        <input type="text" id="input-price1" class="form-control form-control-alternative" placeholder="ex_맞춤 광고">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-product-code imageUpload">이미지 업로드</label>
-                      <input type="file" class="form-control form-control-alternative" id="input-imageUpload" name="imageUpload">
+                      <input type="file" class="form-control form-control-alternative" id="input-imageUpload1" name="imageUpload">
                       </div>
                       <div>
-                        <a href="#!" class="btn btn-sm btn-warning float-lg-right ">등록하기</a>
+                        <a href="#!" id="submit-button1" class="btn btn-sm btn-warning float-lg-right" onclick="insertFitAds()">등록하기</a>
                       </div>
                     </div>
                   </div>
@@ -288,17 +290,17 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-price">광고 이름</label>
-                        <input type="text" id="input-price" class="form-control form-control-alternative" placeholder="ex_추천상품광고">
+                        <label class="form-control-label" for="input-price2">광고 이름</label>
+                        <input type="text" id="input-price2" class="form-control form-control-alternative" placeholder="ex_추천상품광고">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-product-code imageUpload">이미지 업로드</label>
-                      <input type="file" class="form-control form-control-alternative" id="input-imageUpload" name="imageUpload">
+                      <input type="file" class="form-control form-control-alternative" id="input-imageUpload2" name="imageUpload">
                       </div>
                       <div>
-                        <a href="#!" class="btn btn-sm btn-warning float-lg-right ">등록하기</a>
+                        <a href="#!" id="submit-button2" class="btn btn-sm btn-warning float-lg-right" onclick="insertRecomAds()">등록하기</a>
                       </div>
                     </div>
                   </div>
@@ -333,7 +335,7 @@
         application: "argon-dashboard-free"
       });
   </script>
-  <script type="text/javascript" src="assets/js/ads.js"></script>
+ 
 </body>
 
 </html>

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class pageController {
 	
-	@GetMapping("/")
+	@GetMapping("login")
 	public String login() {
 		return "login";
 	}
@@ -18,7 +18,7 @@ public class pageController {
 	public String call() {
 		return "call";
 	}
-	@GetMapping("/register")
+	@GetMapping("/")
 	public String regiset() {
 		return "register";
 	}

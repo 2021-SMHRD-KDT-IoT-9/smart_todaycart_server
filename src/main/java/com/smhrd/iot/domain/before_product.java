@@ -9,4 +9,5 @@ public class before_product {
 	private int P_PRICE;  
 	private String P_LOC;
 	private int P_WEIGHT;
+	private String P_IMG;
 }

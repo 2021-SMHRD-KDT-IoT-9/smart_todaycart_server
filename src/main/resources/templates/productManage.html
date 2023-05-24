@@ -31,6 +31,7 @@
   <link href="assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
+  <script type="text/javascript" src="assets/js/product.js"></script>
 </head>
 
 <body class="">
@@ -238,7 +239,7 @@
                   <h3 class="mb-0">새 상품 추가</h3>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="#!" class="btn btn-md btn-warning">등록하기</a>
+                  <a href="#!" id="product_button" class="btn btn-md btn-warning" onclick="uploadProduct()">등록하기</a>
                 </div>
               </div>
             </div>
@@ -251,7 +252,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-productname">상품 이름</label>
-                        <input type="text" id="input-productname" class="form-control form-control-alternative" placeholder="상품이름입력">
+                        <input type="text" id="input-productname" class="form-control form-control-alternative" placeholder="상품이름입력" >
                       </div>
                     </div>
                     <div class="col-lg-6">
@@ -271,7 +272,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-location">상품위치</label>
-                        <input type="text" id="input-location" class="form-control form-control-alternative" placeholder="예시_냉동식품1-2">
+                        <input type="text" id="input-location" class="form-control form-control-alternative" placeholder="예시_냉동식품1-2" >
                       </div>
                     </div>
                   </div>

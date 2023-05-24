@@ -30,8 +30,9 @@ public class adminRestController {
 	@Autowired
 	adminService service;
 	
-	@PostMapping(value="/registerCheck")
-	public void register(@ModelAttribute manager m) {		
+	@PostMapping(value="/registerCheck", consumes = "application/json")
+	public void register(@RequestBody manager m) {	
+			System.out.println("시도");
 			service.register(m);
 	}
 	@PostMapping(value="/loginCheck" , consumes = "application/json")
