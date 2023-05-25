@@ -7,6 +7,6 @@ import com.smhrd.iot.domain.before_product;
 
 @Mapper
 public interface ProductMapper {
-	@Insert("INSERT IGNORE INTO BEFORE_PRODUCT VALUES(#{bepro.P_CODE},#{bepro.P_NAME},#{bepro.P_PRICE},#{bepro.P_LOC},#{bepro.P_WEIGHT},#{fileName})")
+	@Insert("INSERT IGNORE INTO BEFORE_PRODUCT VALUES(#{bepro.p_code},#{bepro.p_name},#{bepro.p_price},#{bepro.p_loc},#{bepro.p_weight},#{fileName})")
 	public int insertProduct(String fileName,before_product bepro);
 }

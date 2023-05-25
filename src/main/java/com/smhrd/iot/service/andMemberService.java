@@ -14,4 +14,7 @@ public class andMemberService {
 	public int memberLogin(String id, String pw) {
 		return mapper.memberLogin(id,pw);
 	}
+	public int newMember(member_info m) {
+		return mapper.newMember(m);
+	}
 }

@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class before_product {
-	private int P_CODE; 
-	private String P_NAME;
-	private int P_PRICE;  
-	private String P_LOC;
-	private int P_WEIGHT;
-	private String P_IMG;
+	private int p_code; 
+	private String p_name;
+	private int p_price;  
+	private String p_loc;
+	private int p_weight;
+	private String p_img;
 }

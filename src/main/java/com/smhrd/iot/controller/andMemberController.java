@@ -24,50 +24,41 @@ public class andMemberController {
 	@Autowired
 	andMemberService service;
 
-	//@RequestMapping(value = "/loginCheckMember")
-	//public String memberLogin() {
-		// @RequestBody Map<String, String> params
-	//	System.out.println("안드로이드 요청 들어옴");
-		// JSONObject responseJson = new JSONObject();
-		// responseJson.put("success", true);
-		// responseJson.put("message", "로그인 성공");
-
-		// return responseJson.toString();
-	//	return null;
-	//}
 	private ObjectMapper objectMapper = new ObjectMapper();
 	
 	 @RequestMapping(value="/loginCheckMember", method=RequestMethod.POST, consumes = "application/json")
 	 public ResponseEntity<Map<String, Object>> memberLogin(@RequestBody member_info m) {
-		 System.out.println("데이터가 온다");
-		 System.out.println(m.toString());
 		  String id =m.getMember_id();
 		  String pw =m.getMember_pw();
-		  System.out.println(id);
-		  System.out.println(pw);
 
-		 boolean success = false;
-		 
 		 if(service.memberLogin(id,pw)>0) {
-			 success = true; // 로그인 성공 여부
-			 System.out.println("서버는 된다");
-		 }else {
-			 System.out.println("서버는 안된다");
-		 }
-		 
-		  if (success) {
-			  Map<String, Object> response = new HashMap<>();
+			 Map<String, Object> response = new HashMap<>();
 	            response.put("success", true);
 	            response.put("message", "로그인 성공");
 	            return ResponseEntity.ok(response);
-		    } else {
+		 }
+		 else {
 		    	Map<String, Object> response = new HashMap<>();
 		        response.put("success", false);
 		        response.put("message", "로그인 실패");
 		        return ResponseEntity.ok(response);
 		    }
 	 } 
-	 
+	 @RequestMapping(value="/newMember", method=RequestMethod.POST, consumes = "application/json")
+	 public ResponseEntity<Map<String, Object>> newMember(@RequestBody member_info m){
+		 if(service.newMember(m)>0) {
+			 Map<String, Object> response = new HashMap<>();
+	            response.put("success", true);
+	            response.put("message", "회원가입 성공");
+	            return ResponseEntity.ok(response);
+		 }
+		 else {
+		    	Map<String, Object> response = new HashMap<>();
+		        response.put("success", false);
+		        response.put("message", "회원가입 실패");
+		        return ResponseEntity.ok(response);
+		    }
+	 }
 	
 	
 	}

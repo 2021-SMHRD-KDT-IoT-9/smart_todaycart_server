@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class cart_info {
-	private String MEMBER_ID;
-	private String CART_ID;
-	private String C_DATE;
+	private String member_id;
+	private String cart_id;
+	private String c_date;
 }

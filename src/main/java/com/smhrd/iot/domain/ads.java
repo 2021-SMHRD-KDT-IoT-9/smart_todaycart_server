@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class ads {
-	private String ADS_ID;
-	private String ADS_IMG;
-	private String T_START;
-	private String T_END;
-	private String ADS_TYPE;
+	private String ads_id;
+	private String ads_img;
+	private String t_start;
+	private String t_end;
+	private String ads_type;
 }
