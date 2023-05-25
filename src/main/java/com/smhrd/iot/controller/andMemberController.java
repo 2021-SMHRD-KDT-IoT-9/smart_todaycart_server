@@ -1,5 +1,7 @@
 package com.smhrd.iot.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,16 @@ public class andMemberController {
 		// return responseJson.toString();
 	//	return null;
 	//}
+	
+	 @PostMapping(value="/loginCheckMember")
+	 public String memberLogin(@RequestBody Map<String, String> params, member_info m) {
+		 
+		 m.setMEMBER_ID(params.get("id"));
+		 m.setMEMBER_PW(params.get("pw"));
+		return "aa";
+	 } 
+	 
+	 
 	
 	}
 
