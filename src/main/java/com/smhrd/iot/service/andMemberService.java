@@ -11,7 +11,7 @@ public class andMemberService {
 	@Autowired
 	AndMapper mapper;
 	
-	public int memberLogin(member_info m) {
-		return mapper.memberLogin(m);
+	public int memberLogin(String id, String pw) {
+		return mapper.memberLogin(id,pw);
 	}
 }
