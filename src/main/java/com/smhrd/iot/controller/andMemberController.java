@@ -35,7 +35,11 @@ public class andMemberController {
 		 
 		 m.setMEMBER_ID(params.get("id"));
 		 m.setMEMBER_PW(params.get("pw"));
-		return "aa";
+		 if(service.memberLogin(m)>0) {
+			 return "로그인이랑통신성공";
+		 }else {
+			 return "로그인이랑통신실패";
+		 }
 	 } 
 	 
 	 
