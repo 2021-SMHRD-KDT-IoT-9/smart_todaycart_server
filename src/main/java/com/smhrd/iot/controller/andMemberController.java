@@ -46,16 +46,19 @@ public class andMemberController {
 	 } 
 	 @RequestMapping(value="/newMember", method=RequestMethod.POST, consumes = "application/json")
 	 public ResponseEntity<Map<String, Object>> newMember(@RequestBody member_info m){
+		
 		 if(service.newMember(m)>0) {
 			 Map<String, Object> response = new HashMap<>();
 	            response.put("success", true);
 	            response.put("message", "회원가입 성공");
+	            
 	            return ResponseEntity.ok(response);
 		 }
 		 else {
 		    	Map<String, Object> response = new HashMap<>();
-		        response.put("success", false);
+		        response.put("fail", false);
 		        response.put("message", "회원가입 실패");
+		        
 		        return ResponseEntity.ok(response);
 		    }
 	 }

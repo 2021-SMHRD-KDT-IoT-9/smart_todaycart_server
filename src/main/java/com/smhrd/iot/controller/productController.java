@@ -39,10 +39,7 @@ public class productController {
 			System.out.println(realPath);
 			//String filePath2 = request.getRealPath("resources/static/adsUpload");
 			//System.out.println(filePath2);
-			
-			    
-			    
-			
+
 			
 			Path filePath = Path.of(realPath, fileName);
 			//Path filePath = Path.of(filePath2, fileName);

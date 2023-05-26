@@ -11,8 +11,7 @@ public class member_info {
 	private String member_add;
 	private String member_gender;
 	
-	private String abc;
-	private String def;
+
 	
 	@Override
 	public String toString() {

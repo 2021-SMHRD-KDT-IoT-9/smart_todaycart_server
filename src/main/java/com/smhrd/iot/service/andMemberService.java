@@ -15,6 +15,7 @@ public class andMemberService {
 		return mapper.memberLogin(id,pw);
 	}
 	public int newMember(member_info m) {
+		System.out.println("서비스");
 		return mapper.newMember(m);
 	}
 }
