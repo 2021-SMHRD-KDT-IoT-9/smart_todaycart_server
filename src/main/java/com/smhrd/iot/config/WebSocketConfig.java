@@ -1,4 +1,4 @@
-package com.smhrd.iot.service;
+package com.smhrd.iot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

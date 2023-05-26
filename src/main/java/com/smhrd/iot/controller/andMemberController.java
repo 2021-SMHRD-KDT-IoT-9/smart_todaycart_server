@@ -28,6 +28,7 @@ public class andMemberController {
 	
 	 @RequestMapping(value="/loginCheckMember", method=RequestMethod.POST, consumes = "application/json")
 	 public ResponseEntity<Map<String, Object>> memberLogin(@RequestBody member_info m) {
+		 
 		  String id =m.getMember_id();
 		  String pw =m.getMember_pw();
 
@@ -46,7 +47,7 @@ public class andMemberController {
 	 } 
 	 @RequestMapping(value="/newMember", method=RequestMethod.POST, consumes = "application/json")
 	 public ResponseEntity<Map<String, Object>> newMember(@RequestBody member_info m){
-		
+		System.out.println(m.toString());
 		 if(service.newMember(m)>0) {
 			 Map<String, Object> response = new HashMap<>();
 	            response.put("success", true);

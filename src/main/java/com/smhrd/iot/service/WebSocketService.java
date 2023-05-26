@@ -10,22 +10,29 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.smhrd.iot.domain.before_product;
+
 @Service
-@ServerEndpoint(value = "/chatt")
-public class WebSocketC {
+@ServerEndpoint(value = "/shopingcart")
+public class WebSocketService {
+	
+	@Autowired
+	andProductService service;
+	
 	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
 	
+	//바코드 값을 읽어오면 해당 바코드의 상품을 안드로이드 단에 보내는 함수
 	@OnMessage
-	public void onMessage(String msg, Session session) throws Exception{
-		System.out.println("receive message : " + msg);
-		for(Session s : clients) {
-			System.out.println("send data : " + msg);
-			s.getBasicRemote().sendText(msg);
-
-		}
+	public before_product onMessage(String barcode) throws Exception{
+		System.out.println("받은 바코드 값 : " + barcode);
+		before_product product = service.getBarcodeProduct(barcode);
+		return product;
 	}
+	
+	
 	
 	@OnOpen
 	public void onOpen(Session s) {

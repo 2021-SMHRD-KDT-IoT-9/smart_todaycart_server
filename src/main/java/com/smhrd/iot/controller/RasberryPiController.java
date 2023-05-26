@@ -26,22 +26,21 @@ import com.smhrd.iot.domain.before_product;
 import com.smhrd.iot.domain.scanBarcode;
 import com.smhrd.iot.service.andProductService;
 import com.smhrd.iot.service.RaspberryPiService;
+import com.smhrd.iot.service.WebSocketService;
 
 
 @RestController
 public class RasberryPiController {
 	
-	private final ApplicationEventPublisher eventPublisher;
+	//웹 소켓 통신을 위해 필요한 객체
+	@Autowired
+	private WebSocketService socketService;
 	
+	//이미지 파일 통신을 위해 필요한 객체
 	@Autowired
 	RaspberryPiService service;
 	
-	 @Autowired
-	    public RasberryPiController(ApplicationEventPublisher eventPublisher) {
-	        this.eventPublisher = eventPublisher;
-	    }
-
-
+	
 	@PostMapping(value="/scan")
 	public void scanBarcode(@RequestParam("img") MultipartFile file) throws IOException{
 		service.dataToImage(file);
@@ -50,9 +49,10 @@ public class RasberryPiController {
 	
 	//라즈베리파이에서 바코드를 읽은 후 해당 상품을 안드로이드로 보내는 코드
 	@GetMapping(value="/Barcode")
-	public void getBarcode(@RequestParam("barcode")String barcode) {
+	public void getBarcode(@RequestParam("barcode")String barcode) throws Exception {
 		System.out.println("라즈베리파이에서 읽은 바코드 값 : "+barcode);
-		 eventPublisher.publishEvent(new BarcodeEvent(barcode));
+		//라즈베리파이에서 읽어온 후 그 값을 소켓 통신단 안에 있는 함수에 넣기
+		socketService.onMessage(barcode);
 	}
 	
 }

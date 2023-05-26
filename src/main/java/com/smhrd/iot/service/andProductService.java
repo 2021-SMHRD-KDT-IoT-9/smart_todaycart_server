@@ -11,8 +11,6 @@ public class andProductService {
 	@Autowired
 	AndProductMapper mapper;
 	
-	
-	
 	public before_product getBarcodeProduct(String barcode) {
 		return mapper.getBarcodeProduct(barcode);
 	}
