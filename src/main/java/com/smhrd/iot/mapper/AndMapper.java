@@ -12,4 +12,5 @@ public interface AndMapper {
 	public int memberLogin(String id, String pw);
 	@Insert("Insert into MEMBER_INFO values(#{member_id},#{member_pw},#{member_name},#{member_tel},#{member_add},#{member_gender})")
 	public int newMember(member_info m);
+	
 }

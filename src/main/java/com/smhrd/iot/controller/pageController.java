@@ -22,6 +22,12 @@ public class pageController {
 	public String regiset() {
 		return "register";
 	}
+	
+	@GetMapping("/register")
+	public String regiset2() {
+		return "redirect:/";
+	}
+	
 	@GetMapping("/users")
 	public String users() {
 		return "users";

@@ -1,6 +1,11 @@
+// 페이지가 로드되면 멤버 리스트를 불러옵니다.
+document.addEventListener('DOMContentLoaded', function() {
+  loadMemberList();
+});
+
 
 function loadMemberList() {
-
+	 
   var table = document.querySelector('#memberTable');
 
 
@@ -8,7 +13,7 @@ function loadMemberList() {
   xhr.open('GET', 'memberList', true);
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
-
+	 
       var memberList = JSON.parse(xhr.responseText);
 
       var tbody = table.querySelector('#memberTableBody');
@@ -17,25 +22,25 @@ function loadMemberList() {
     
       memberList.forEach(function(member) {
         var row = document.createElement('tr');
-
+		
         // ID 열
         var idCell = document.createElement('td');
-        idCell.textContent = member.member_ID;
+        idCell.textContent = member.member_id;
         row.appendChild(idCell);
 
         // 이름 열
         var nameCell = document.createElement('td');
-        nameCell.textContent = member.member_NAME;
+        nameCell.textContent = member.member_name;
         row.appendChild(nameCell);
 
         // 연락처 열
         var contactCell = document.createElement('td');
-        contactCell.textContent = member.member_TEL;
+        contactCell.textContent = member.member_tel;
         row.appendChild(contactCell);
 
         // 주소 열
         var addressCell = document.createElement('td');
-        addressCell.textContent = member.member_ADD;
+        addressCell.textContent = member.member_add;
         row.appendChild(addressCell);
 
         // 삭제 버튼 열
@@ -62,10 +67,6 @@ function loadMemberList() {
   xhr.send();
 }
 
-// 페이지가 로드되면 멤버 리스트를 불러옵니다.
-document.addEventListener('DOMContentLoaded', function() {
-  loadMemberList();
-});
 
 //해당 member_id삭제 
 function deleteMember(memberId) {

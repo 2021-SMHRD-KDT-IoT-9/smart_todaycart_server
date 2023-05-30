@@ -48,6 +48,7 @@ public class adminRestController {
 	}
 	@GetMapping(value="/memberList", produces = "application/json")
 	public String showMember() throws JsonProcessingException{
+		System.out.println("컨트롤러단이 되나");
 		 List<member_info> members = service.showMember();
 
 		    ObjectMapper objectMapper = new ObjectMapper();

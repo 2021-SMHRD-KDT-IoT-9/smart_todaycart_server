@@ -1,3 +1,8 @@
+// 페이지가 로드되면 리스트를 불러옵니다.
+document.addEventListener('DOMContentLoaded', function() {
+  loadCartList();
+});
+
 function loadCartList() {
 
 
@@ -18,23 +23,23 @@ function loadCartList() {
       cartList.forEach(function(cart) {
 
         var row = document.createElement('tr');
-
+       ;
         // ID 열
         var idCell = document.createElement('td');
-        idCell.textContent = cart.cart_ID;
-        console.log(cart.cart_ID);
+        idCell.textContent = cart.cart_id;
+        console.log(cart.cart_id);
         row.appendChild(idCell);
 
         // 이름 열
         var nameCell = document.createElement('td');
-        nameCell.textContent = cart.member_ID;
-        console.log(cart.member_ID);
+        nameCell.textContent = cart.member_id;
+        console.log(cart.member_id);
         row.appendChild(nameCell);
 
         // 연락처 열
         var contactCell = document.createElement('td');
-        contactCell.textContent = cart.member_TEL;
-        console.log(cart.member_TEL);
+        contactCell.textContent = cart.member_tel;
+        console.log(cart.member_tel);
         row.appendChild(contactCell);
 
 		var batteryDiv = document.createElement('div');
@@ -69,7 +74,3 @@ function loadCartList() {
   xhr.send();
 }
 
-// 페이지가 로드되면 리스트를 불러옵니다.
-document.addEventListener('DOMContentLoaded', function() {
-  loadCartList();
-});

@@ -56,10 +56,7 @@ public class productController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-				
-				
-				
-				
+	
 			}
 
 		} else {

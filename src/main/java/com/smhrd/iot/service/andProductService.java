@@ -14,4 +14,9 @@ public class andProductService {
 	public before_product getBarcodeProduct(String barcode) {
 		return mapper.getBarcodeProduct(barcode);
 	}
+	public int InsertCallList(String id, String barcode) {
+		System.out.println("안드로이드 직원호출 서비스");
+		return mapper.InsertCallList(id, barcode);
+	}
+	
 }
