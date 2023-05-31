@@ -109,3 +109,30 @@ function insertRecomAds() {
 
   xhr.send(formData);
 }
+
+  // 클릭 이벤트 처리 코드
+  $('a.dropdown-item').click(function(e) {
+    e.preventDefault(); // 기본 동작을 막습니다.
+
+    logout(); // logout() 함수 실행
+  });
+
+
+function logout() {
+	console.log("시도");
+  $.ajax({
+    url: 'logout',
+    type: 'POST',
+    success: function(response) {
+      console.log('로그아웃 성공');
+      window.location.href = 'login';
+    },
+    error: function(xhr, status, error) {
+      console.error('로그아웃 실패:', error);
+ 
+    }
+  });
+
+
+}
+

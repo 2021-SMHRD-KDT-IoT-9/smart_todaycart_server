@@ -46,6 +46,14 @@ public class adminRestController {
 			//System.out.println(m.getManager_id());
 		}		
 	}
+	
+	//서버에서 클라이언트로 세션값 전해주는 코드
+	@GetMapping("/getSessionLoginId")
+	public String getSessionLoginId(HttpSession session) {
+	    String loginId = (String) session.getAttribute("loginId");
+	    return loginId != null ? loginId : "";
+	}
+	
 	@GetMapping(value="/memberList", produces = "application/json")
 	public String showMember() throws JsonProcessingException{
 		System.out.println("컨트롤러단이 되나");
@@ -62,12 +70,13 @@ public class adminRestController {
 	    
 	}
 	
-	//@PostMapping(value="/showCallList")
-	//public String showCallList(member_info m, cart_info c, before_product b) throws JsonProcessingException{
-	//	List<callList> callList = service.showCallList(m, c, b);
-	//	ObjectMapper objectMapper = new ObjectMapper();
-	//    String json = objectMapper.writeValueAsString(callList);
-	//    return json;
-	//}
+	//로그아웃 기능
+	@PostMapping(value="/logout")
+	public void logout(HttpSession session) {
+		if(session.getAttribute("loginId")!=null) {
+			service.logout(session);
+			System.out.println("로그아웃 성공");
+		}
+	}
 
 }

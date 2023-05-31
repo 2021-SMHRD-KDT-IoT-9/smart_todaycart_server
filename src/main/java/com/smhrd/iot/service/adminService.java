@@ -2,6 +2,8 @@ package com.smhrd.iot.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,9 @@ public class adminService {
 		mapper.deleteMember(member_ID);
 	}
 	
-	//public List<callList> showCallList(member_info m, cart_info c, before_product b){
-	//	return mapper.showCallList(m, c, b);
-	//}
+	//로그아웃 기능 구현
+		public void logout(HttpSession session) {
+			session.invalidate();
+			
+		}
 }

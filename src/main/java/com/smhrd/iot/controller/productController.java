@@ -35,12 +35,7 @@ public class productController {
 	@PostMapping(value = "/insertProduct")
 	public void uploadImage(HttpServletRequest request, @RequestParam("imageFile") MultipartFile imageFile, @ModelAttribute before_product product) {
 		if (!imageFile.isEmpty()) {
-			System.out.println(product.getP_code());
-			System.out.println(product.getP_loc());
-			System.out.println(product.getP_img());
-			System.out.println(product.getP_name());
-			System.out.println(product.getP_price());
-			System.out.println(product.getP_weight());
+	
 			String fileName = "/" + product.getP_name() + "_" + imageFile.getOriginalFilename();
 			String realPath=uploadPath+"/productUpload";
 			
@@ -51,8 +46,7 @@ public class productController {
 			
 			Path filePath = Path.of(realPath, fileName);
 			//Path filePath = Path.of(filePath2, fileName);
-			
-			
+
 
 			try {
 				Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);

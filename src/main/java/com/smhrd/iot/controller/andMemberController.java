@@ -33,6 +33,7 @@ public class andMemberController {
 		  String pw =m.getMember_pw();
 
 		 if(service.memberLogin(id,pw)>0) {
+			 System.out.println("로그인 시도");
 			 Map<String, Object> response = new HashMap<>();
 	            response.put("success", true);
 	            response.put("message", "로그인 성공");
