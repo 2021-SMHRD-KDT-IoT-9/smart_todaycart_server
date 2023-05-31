@@ -13,17 +13,18 @@ function uploadProduct(){
   var productCode= document.getElementById("input-product-code").value;
  
 
-  var formData = new FormData();
-   formData.append("P_CODE",productCode);
-   formData.append("P_NAME", productName);
-   formData.append("P_PRICE", productPrice);
-   formData.append("P_LOC", productLocation);
-   formData.append("P_IMG", "1");
-   formData.append("imageFile", imageFile);
+var formData = new FormData();
+formData.append("p_code", productCode);
+formData.append("p_name", productName);
+formData.append("p_price", productPrice);
+formData.append("p_loc", productLocation);
+formData.append("p_img", "1");
+formData.append("imageFile", imageFile);
+
+
 
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "insertProduct", true);
-
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       // 요청이 완료되었을 때
@@ -31,6 +32,7 @@ function uploadProduct(){
 
       if (xhr.status === 200) {
         // 업로드 성공 시 처리할 로직
+        
         console.log("이미지 업로드 성공");
       } else {
         // 업로드 실패 시 처리할 로직

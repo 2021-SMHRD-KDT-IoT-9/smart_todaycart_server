@@ -24,4 +24,7 @@ public interface AndProductMapper {
 			+ "  CART_INFO.MEMBER_ID = #{id};\r\n"
 			+ "")
 	public int InsertCallList(String id, String barcode);
+	
+	@Insert("Insert into AFTER_PRODUCT values(#{member_id},#{p_code},NOW())")
+	public int InsertAfterProduct(before_product product,String member_id);
 }

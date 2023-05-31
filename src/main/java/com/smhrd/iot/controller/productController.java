@@ -1,5 +1,6 @@
 package com.smhrd.iot.controller;
 
+import java.awt.PageAttributes.MediaType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,9 +32,15 @@ public class productController {
 	@Value("${upload.path}")
 	private String uploadPath;
 
-	@PostMapping("/insertProduct")
+	@PostMapping(value = "/insertProduct")
 	public void uploadImage(HttpServletRequest request, @RequestParam("imageFile") MultipartFile imageFile, @ModelAttribute before_product product) {
 		if (!imageFile.isEmpty()) {
+			System.out.println(product.getP_code());
+			System.out.println(product.getP_loc());
+			System.out.println(product.getP_img());
+			System.out.println(product.getP_name());
+			System.out.println(product.getP_price());
+			System.out.println(product.getP_weight());
 			String fileName = "/" + product.getP_name() + "_" + imageFile.getOriginalFilename();
 			String realPath=uploadPath+"/productUpload";
 			

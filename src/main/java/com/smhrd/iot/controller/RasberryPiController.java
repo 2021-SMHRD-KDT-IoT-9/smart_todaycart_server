@@ -27,16 +27,12 @@ import com.smhrd.iot.domain.before_product;
 import com.smhrd.iot.domain.scanBarcode;
 import com.smhrd.iot.service.andProductService;
 import com.smhrd.iot.service.RaspberryPiService;
-import com.smhrd.iot.service.WebSocketService;
+
 
 
 @RestController
 public class RasberryPiController {
-	
-	//웹 소켓 통신을 위해 필요한 객체
-	@Autowired
-	private WebSocketService socketService;
-	
+
 	//이미지 파일 통신을 위해 필요한 객체
 	@Autowired
 	RaspberryPiService service;
@@ -53,9 +49,9 @@ public class RasberryPiController {
 	
 	//라즈베리파이에서 바코드를 읽은 후 해당 상품을 안드로이드로 보내는 코드
 	@GetMapping(value="/Barcode")
-	public void getBarcode(@RequestParam("barcode") String barcode,HttpSession session) throws Exception {
+	public void getBarcode(@RequestParam("barcode") String barcode) throws Exception {
 		System.out.println("라즈베리파이에서 읽은 바코드 값 : "+barcode);
-		barcodeScan.setBarcode(barcode);
+		barcodeScan.setBarcode("45678");
 	}
 	
 }
