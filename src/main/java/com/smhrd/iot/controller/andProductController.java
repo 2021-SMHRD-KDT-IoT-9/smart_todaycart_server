@@ -144,7 +144,6 @@ public class andProductController {
 		}
 		//결과가 어떻게 되든 무게 센서에서 측정한 무게 값을 0으로 초기화
 		 productName.clear();
-		 System.out.println(productName.size());
 		controller.weightMeasure=0;
 		 return ResponseEntity.ok(response);
 		
@@ -171,11 +170,9 @@ public class andProductController {
 				for(pythonResult result : resultset) {
 					String p_name = result.getP_name();
 					productName.add(p_name);
-					
+				
 					}
-				for (String name : productName) {
-				    System.out.println(name);
-				}
+				
 				
 			} 
 	

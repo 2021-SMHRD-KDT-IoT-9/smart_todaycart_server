@@ -19,12 +19,12 @@ function loginCheck() {
     contentType: "application/json",
     success: function(response) {
       // Login successful
-      alert("Login successful!");
+      alert("로그인 성공");
       window.location.href = "users"; // Redirect to call.html
     },
     error: function(xhr, status, error) {
       // Login failed
-      alert("Login failed!");
+      alert("로그인 실패");
     }
   });
 }

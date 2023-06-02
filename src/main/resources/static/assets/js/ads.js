@@ -25,9 +25,12 @@ function insertFitAds() {
       if (xhr.status === 200) {
         // 업로드 성공 시 처리할 로직
         console.log("이미지 업로드 성공");
+        alert("소비자 맞춤광고 업로드");
+         location.reload(); 
       } else {
         // 업로드 실패 시 처리할 로직
         console.error("이미지 업로드 실패");
+        alert("업로드 실패");
       }
     }
   };
@@ -61,9 +64,12 @@ function insertTimeAds() {
       if (xhr.status === 200) {
         // 업로드 성공 시 처리할 로직
         console.log("이미지 업로드 성공");
+        alert("주간광고 업로드");
+         location.reload(); 
       } else {
         // 업로드 실패 시 처리할 로직
         console.error("이미지 업로드 실패");
+        alert("업로드 실패");
       }
     }
   };
@@ -100,9 +106,12 @@ function insertRecomAds() {
       if (xhr.status === 200) {
         // 업로드 성공 시 처리할 로직
         console.log("이미지 업로드 성공");
+        alert("상품 추천광고 업로드");
+         location.reload(); 
       } else {
         // 업로드 실패 시 처리할 로직
         console.error("이미지 업로드 실패");
+        alert("업로드 실패");
       }
     }
   };

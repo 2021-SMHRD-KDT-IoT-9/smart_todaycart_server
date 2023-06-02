@@ -34,6 +34,8 @@ formData.append("imageFile", imageFile);
         // 업로드 성공 시 처리할 로직
         
         console.log("이미지 업로드 성공");
+        alert("상품 업로드");
+        location.reload(); 
       } else {
         // 업로드 실패 시 처리할 로직
         console.error("이미지 업로드 실패");
