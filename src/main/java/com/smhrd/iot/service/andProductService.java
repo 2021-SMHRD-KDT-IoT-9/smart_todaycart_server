@@ -22,8 +22,8 @@ public class andProductService {
 		return mapper.InsertCallList(id, barcode);
 	}
 	//결제 완료된 상품 객체를 after_product에 insert시키는 단
-	public int InsertAfterProduct(before_product product,String member_id) {
+	public int InsertAfterProduct(int code,String member_id) {
 		System.out.println("결제 완료 물품 추가");
-		return mapper.InsertAfterProduct(product, member_id);
+		return mapper.InsertAfterProduct(code, member_id);
 	}
 }

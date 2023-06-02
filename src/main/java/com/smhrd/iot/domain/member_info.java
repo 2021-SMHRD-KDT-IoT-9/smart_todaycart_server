@@ -10,15 +10,17 @@ public class member_info {
 	private String member_tel;
 	private String member_add;
 	private String member_gender;
-	
-
+	private String member_birth;
 	
 	@Override
 	public String toString() {
 		return "member_info [member_id=" + member_id + ", member_pw=" + member_pw + ", member_name=" + member_name
 				+ ", member_tel=" + member_tel + ", member_add=" + member_add + ", member_gender=" + member_gender
-				+ "]";
+				+ ", member_birth=" + member_birth + "]";
 	}
+
+	
+
 	
 	
 }
