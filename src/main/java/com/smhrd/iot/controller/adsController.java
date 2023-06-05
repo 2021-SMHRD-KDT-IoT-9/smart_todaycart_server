@@ -29,7 +29,7 @@ public class adsController {
 
 	@PostMapping("/upload")
 	public void uploadImage(HttpServletRequest request, @RequestParam("imageFile") MultipartFile imageFile,
-			@RequestParam("imageName") String imageName, @RequestParam("adsType") String adsType) {
+			@RequestParam("imageName") String imageName,@RequestParam("imageType") String imageType, @RequestParam("adsType") String adsType) {
 
 		if (!imageFile.isEmpty()) {
 			String fileName = "/" + imageName + "_" + imageFile.getOriginalFilename();
@@ -38,17 +38,14 @@ public class adsController {
 			System.out.println(realPath);
 			//String filePath2 = request.getRealPath("resources/static/adsUpload");
 			//System.out.println(filePath2);
-			
-			
 			Path filePath = Path.of(realPath, fileName);
 			//Path filePath = Path.of(filePath2, fileName);
-			
-			
+	
 
 			try {
 				Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 				// 파일 저장 성공 시 처리할 로직
-				insertImage(fileName, imageName, adsType);
+				insertImage(fileName, imageName, adsType,imageType);
 				imageFile.getInputStream().close();
 				System.out.println("이미지 저장 성공");
 			} catch (IOException e) {
@@ -68,9 +65,9 @@ public class adsController {
 		}
 	}
 
-	private void insertImage(String fileName, String imageName, String adsType) {
-		service.insertImage(fileName, imageName, adsType);
-		System.out.println(service.insertImage(fileName, imageName, adsType));
+	private void insertImage(String fileName, String imageName, String adsType,String imageType) {
+		service.insertImage(fileName, imageName, adsType,imageType);
+		System.out.println(service.insertImage(fileName, imageName, adsType,imageType));
 	}
 
 }

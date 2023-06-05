@@ -11,11 +11,18 @@ public class andMemberService {
 	@Autowired
 	AndMapper mapper;
 	
+	//안드로이드 로그인
 	public int memberLogin(String id, String pw) {
 		return mapper.memberLogin(id,pw);
 	}
+	//안드로이드 회원가입
 	public int newMember(member_info m) {
-		System.out.println("서비스");
 		return mapper.newMember(m);
 	}
+	
+	//안드로이드 로그인한 id 정보 가져오기
+	public member_info memberInform(String id) {
+		return mapper.memberInform(id);
+	}
+	
 }

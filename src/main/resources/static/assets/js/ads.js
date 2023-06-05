@@ -7,11 +7,13 @@ function insertFitAds() {
   var fileInput = document.getElementById("input-imageUpload1");
   var imageFile = fileInput.files[0];
   var imageName = document.getElementById("input-price1").value;
+  var imageType = document.getElementById("input-type1").value;
   var adsType = "2";
 
   var formData = new FormData();
   formData.append("imageFile", imageFile);
   formData.append("imageName", imageName);
+  formData.append("imageType", imageType);
   formData.append("adsType", adsType); // ADS_TYPE 추가
 
   var xhr = new XMLHttpRequest();
@@ -88,11 +90,13 @@ function insertRecomAds() {
   var fileInput = document.getElementById("input-imageUpload2");
   var imageFile = fileInput.files[0];
   var imageName = document.getElementById("input-price2").value;
+  var imageType = document.getElementById("input-type2").value;
   var adsType = "3";
 
   var formData = new FormData();
   formData.append("imageFile", imageFile);
   formData.append("imageName", imageName);
+  formData.append("imageType", imageType);
   formData.append("adsType", adsType); // ADS_TYPE 추가
 
   var xhr = new XMLHttpRequest();

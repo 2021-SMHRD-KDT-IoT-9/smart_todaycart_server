@@ -42,29 +42,35 @@ function loadCartList() {
         console.log(cart.member_tel);
         row.appendChild(contactCell);
 
-		var batteryDiv = document.createElement('div');
+
+		var batteryDiv = document.createElement('div');	
 		batteryDiv.classList.add('d-flex', 'align-items-center');
 		var batterySpan = document.createElement('span');
 		batterySpan.classList.add('mr-2');
-		batterySpan.textContent = '60%';
+
+// 랜덤 숫자 생성 (0부터 100까지)
+		var batteryPercentage = Math.floor(Math.random() * 101);
+		batterySpan.textContent = batteryPercentage + '%';
+		
 		var batteryProgressDiv = document.createElement('div');
 		batteryProgressDiv.classList.add('progress');
 		var batteryProgressBarDiv = document.createElement('div');
 		batteryProgressBarDiv.classList.add('progress-bar', 'bg-gradient-danger');
 		batteryProgressBarDiv.setAttribute('role', 'progressbar');
-		batteryProgressBarDiv.setAttribute('aria-valuenow', '60');
+		batteryProgressBarDiv.setAttribute('aria-valuenow', batteryPercentage);
 		batteryProgressBarDiv.setAttribute('aria-valuemin', '0');
 		batteryProgressBarDiv.setAttribute('aria-valuemax', '100');
-		batteryProgressBarDiv.style.width = '60%';
+		batteryProgressBarDiv.style.width = batteryPercentage + '%';
 		
-		batteryDiv.appendChild(batterySpan); // 배터리 바가 나오기 전에 숫자를 먼저 추가
-		batteryDiv.appendChild(batteryProgressDiv); // 배터리 바를 추가
-		batteryProgressDiv.appendChild(batteryProgressBarDiv); // 배터리 바 내부에 진행 바 추가
+		batteryDiv.appendChild(batterySpan);
+		batteryDiv.appendChild(batteryProgressDiv);
+		batteryProgressDiv.appendChild(batteryProgressBarDiv);
+		
 		
 		row.appendChild(batteryDiv);
 		row.appendChild(batteryProgressDiv);
-
-
+		
+	
 
 
         tbody.appendChild(row);

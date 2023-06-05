@@ -1,5 +1,7 @@
 package com.smhrd.iot.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,14 @@ public class andProductService {
 	public int InsertAfterProduct(int code,String member_id) {
 		System.out.println("결제 완료 물품 추가");
 		return mapper.InsertAfterProduct(code, member_id);
+	}
+	//상품 이름 검색하면 해당 상품 select하게
+	public before_product searchProduct(String p_name) {
+		return mapper.searchProduct(p_name);
+	}
+	//해당 위치에 있는 상품들 모두 출력
+	public List<before_product> map(String p_loc){
+		System.out.println("지도 서비스단");
+		return mapper.map(p_loc);
 	}
 }

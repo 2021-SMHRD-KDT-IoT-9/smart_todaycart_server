@@ -1,5 +1,7 @@
 package com.smhrd.iot.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -19,4 +21,11 @@ public interface AndProductMapper {
 	
 	@Insert("Insert into AFTER_PRODUCT values(#{member_id},#{code},NOW())")
 	public int InsertAfterProduct(int code,String member_id);
+	
+   @Select("select * from  BEFORE_PRODUCT where P_NAME=#{p_name}")
+    public before_product searchProduct(String p_name);
+   
+   @Select("select * from  BEFORE_PRODUCT where P_LOC=#{p_loc}")
+   public List<before_product> map(String p_loc);
+   
 }

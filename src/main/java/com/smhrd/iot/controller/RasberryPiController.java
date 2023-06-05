@@ -70,11 +70,8 @@ public class RasberryPiController {
 	@GetMapping(value="/Barcode")
 	public void getBarcode(@RequestParam("barcode") String barcode) throws Exception {
 		System.out.println("라즈베리파이에서 읽은 바코드 값 : "+barcode);
-		barcodeScan.setBarcode("45678");
+		barcodeScan.setBarcode(barcode);
 	}
-	
-	
-			
 			
 		}
 		
