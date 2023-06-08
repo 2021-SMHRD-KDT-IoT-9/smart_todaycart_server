@@ -64,9 +64,12 @@ public class andProductController {
 	RasberryPiController controller = new RasberryPiController();
 	//결제 요청한 장바구니에 있는 상품들 이름에 관한 arrayList
 	ArrayList<String> productName = new ArrayList<>();
+	//장바구니에 상품 추가했을때 관련 추천 상품에 관한 arrayList
+	ArrayList<String> adsProductImg = new ArrayList<>();
 	
 	
-	//직원 호출 버튼 클릭했을 때 callList테이블에 추가
+	
+	//직원 호출 버튼 클릭했을 때 callList테이블에 추가(완료)
 	@RequestMapping(value="/callManager", method=RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Map<String, Object>> callManager(@RequestBody member_info m) {
 		String barcode="12345";
@@ -86,56 +89,89 @@ public class andProductController {
 		
 	}
 	
-	//장바구니 상품 추가
-	@RequestMapping(value = "/shopingcart", method = RequestMethod.POST)
-	public Map<String, Object> addToShoppingCart() {
-		//String barcode=barcodeScan.getBarcode();
-    	String barcode="12345";
-    	 System.out.println("쇼핑카트 시도");
-    	 Map<String, Object> response = new HashMap<>();
-    	 
-    	if(barcode!=null) {
-    		   pt = service.getBarcodeProduct(barcode);
-    		 //장바구니에 들어있는 상품 정보에 맞는 광고 받아오기
-  			 String adsType=adsMachine.sendProductInfo(pt);
-    		   if(adsSelect.getAdsImg(adsType)!=null) {
-    			   System.out.println(pt.toString());
-    			   System.out.println(adsSelect.getAdsImg(adsType));
-    			   response.put("product", pt);
-    	           response.put("adsImg", adsSelect.getAdsImg(adsType));
-     
-    		   }
-    		   else {
-    			   response.put("error", "광고 이미지가 전달되지 않았습니다.");
-    		   }
-    		 
-        } else {
-        	  response.put("error", "광고 이미지와 상품이 전달되지 않았습니다.");
-        }
-    	
-    	return response;
-    }
-	
-
-
-	
-	
-	  @RequestMapping(value="/payProduct", method=RequestMethod.POST, consumes ="application/json") //@RequestBody ArrayList<before_product> productList
-	  public ResponseEntity<Map<String, Object>> payProduct(@RequestBody before_product product, @RequestParam String member_id) {
-		  System.out.println(product.toString()); 
-		  System.out.println(member_id); 
-		  int code = product.getP_code(); 
-		  if(service.InsertAfterProduct(code, member_id)>0){ 
-			System.out.println("결제 완료"); 
-		  	Map<String, Object> response = new HashMap<>(); 
-		  	response.put("success", true); 
-		  	response.put("message", "Success");
-	         return ResponseEntity.ok(response); } 
-		  else { Map<String, Object> response =new HashMap<>(); 
-		  	   response.put("success", false); response.put("message","결제 실패"); 
-		  	   return ResponseEntity.ok(response); }
-		  }
+	//장바구니 상품 추가(완료)
+		@RequestMapping(value = "/shopingcart", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
+		public  before_product addToShoppingCart() {
+			//String barcode=barcodeScan.getBarcode();
+	    	String barcode="12345";
+	    	 System.out.println("쇼핑카트 시도");
+	    	 Map<String, Object> response = new HashMap<>();
+	    	 
+	    	if(barcode!=null) {
+	    		   pt = service.getBarcodeProduct(barcode);
+	    		 //장바구니에 들어있는 상품 정보에 맞는 광고 받아오기
+	  			
+	    			   System.out.println(pt.toString());
 	 
+	    		   }
+	    	else {
+	    		
+	    		System.out.println(service.getBarcodeProduct(barcode));
+	    		
+	    	}
+	    	
+	    
+	    	
+	    	return pt;
+	    }
+		
+		
+		/*
+		  //장바구니 상품 추가+광고 이미지 추가
+		  
+		 @RequestMapping(value = "/shopingcart", method = RequestMethod.POST) public
+		  Map<String, Object> addToShoppingCart() { //String
+		  barcode=barcodeScan.getBarcode(); String barcode="12345";
+		  System.out.println("쇼핑카트 시도"); 
+		  Map<String, Object> response = new HashMap<>();
+		  
+		  if(barcode!=null) {
+		   pt = service.getBarcodeProduct(barcode); //장바구니에 들어있는 상품정보에 맞는 광고 받아오기 
+		   List<String> adsList=adsMachine.sendProductInfo(pt);
+		   for (String adsItem :adsList) { 
+		   
+		     adsProductImg.add(adsSelect.getAdsImg(adsItem,"3")) ;
+		     }
+		  
+		  	System.out.println(pt.toString());
+		  	response.put("product",pt); 
+		  	response.put("imgList", adsProductImg);
+		  	} 
+		  
+		   else { response.put("error", "광고 이미지와 상품이 전달되지 않았습니다."); }
+		  
+		  return response; }
+		 */
+	
+	
+	  
+	   
+		  @RequestMapping(value="/payProduct", method=RequestMethod.POST, consumes="application/json") //@RequestBody ArrayList<before_product> productList
+		  public ResponseEntity<Map<String, Object>> payProduct(@RequestBody ArrayList<before_product> productList, @RequestParam String member_id) {
+		  Map<String, Object> response = new HashMap<>(); 
+		  System.out.println("결제 시도");
+		  System.out.println(productList.size());
+		     for (before_product product :productList) { 
+			    int code = product.getP_code();
+			    System.out.println(product.toString());
+			    if(service.InsertAfterProduct(code, member_id)>0) {
+					  System.out.println("결제 완료"); 
+					  response.put("success", true);
+					  response.put("message", "결제 완료"); } 
+			       else { 
+					 response.put("success", false);
+					 response.put("message","결제 실패");
+					  
+					  } } return ResponseEntity.ok(response); 
+					  }
+	
+		 
+	  
+	  
+	  
+	  
+	  
+		
 	/*
 	
 	//결제 완료 버튼을 눌렀을 때 카메라에 찍힌 이미지와 무게 센서로 측정한 무게로 비교한 후 
@@ -186,14 +222,15 @@ public class andProductController {
 	    }
 		 return check;
 	}
-	
+	*/
 	  //파이썬 서버로부터 스프링 부트는 값을 받아야 한다
-	@RequestMapping(value="/deleteCheck", method=RequestMethod.POST,  consumes = "application/json")
-	public void deleteShopingCart(@RequestBody List<pythonResult> resultset){
+	@RequestMapping(value="/deleteCheck", method=RequestMethod.POST)
+	public void deleteShopingCart(@RequestBody Map<String, Object> jsonData){
 				productName.clear();
-				for(pythonResult result : resultset) {
-					String p_name = result.getP_name();
-					productName.add(p_name);
+				List<String> pCodeList = (List<String>) jsonData.get("p_name");
+				for(String result : pCodeList) {
+					System.out.println(result);
+					productName.add(result);
 				
 					}
 				
@@ -201,14 +238,16 @@ public class andProductController {
 	
 	 
 	
-*/
+
 	 //상품 검색 버튼을 눌렀을 때 
-	  @RequestMapping(value="/searchProduct", method=RequestMethod.GET)
+	  @RequestMapping(value="/searchProduct", method=RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
 	  public before_product searchProduct(String p_name) {
+		  System.out.println(p_name);
 		  before_product  searchPt = service.searchProduct(p_name);
 		  if(searchPt != null) {
 			  System.out.println("상품 검색 잘됨");
-			  return pt;
+			  System.out.println(searchPt.toString());
+			  return searchPt;
 		  }
 		  else {
 			  return null;
@@ -216,21 +255,13 @@ public class andProductController {
 	  }
 	  
 	  
-	  //지도 버튼을 눌렀을 때 
-	  //뭘 받아오지?????????
+	  //지도 버튼을 눌렀을 때(완료)
 	  @RequestMapping(value="/map", method=RequestMethod.GET)
 	  public List<before_product> map(String p_loc) {
-		  System.out.println(p_loc);
-		  System.out.println("지도 요청 들어옴");
 		  List<before_product> mapPt = service.map(p_loc);
-		  System.out.println(mapPt.size());
-		  System.out.println("지도에 있는 리스트들 안드로이드로 보내기 시도");
 		  return mapPt;
 	  }
-	  
-	  
-	  
-	  
+
 			
 }
 	

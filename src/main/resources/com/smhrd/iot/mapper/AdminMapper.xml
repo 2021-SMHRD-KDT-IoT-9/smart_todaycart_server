@@ -13,7 +13,7 @@
 	SELECT member_id, member_name, member_tel, member_add FROM MEMBER_INFO
 </select>
 <delete id="deleteMember" parameterType="String">
-	delete from MEMBER_INFO where member_id=#{member_id}
+	delete from MEMBER_INFO where MEMBER_ID=#{member_id}
 </delete>
 <!--<select id="showCallList" parameterType="com.smhrd.iot.domain.member_info, com.smhrd.iot.domain.cart_info, com.smhrd.iot.domain.before_product" resultType="com.smhrd.iot.domain.callList">
 	SELECT CI.CART_ID, CI.MEMBER_ID, MI.MEMBER_TEL, BP.P_LOC

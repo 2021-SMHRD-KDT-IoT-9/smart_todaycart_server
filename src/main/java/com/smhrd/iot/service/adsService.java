@@ -16,8 +16,8 @@ public class adsService {
 		return mapper.insertImage(fileName, imageName, adsType,imageType);
 	}
 	
-	public String  getAdsImg(String ads) {
+	public String  getAdsImg(String ads_item,String ads_type) {
 		System.out.println("서비스단에서 광고 찾기 성공");
-		return mapper.getAdsImg(ads);
+		return mapper.getAdsImg(ads_item,ads_type);
 	}
 }

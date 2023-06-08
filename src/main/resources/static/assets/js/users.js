@@ -1,6 +1,16 @@
 // 페이지가 로드되면 멤버 리스트를 불러옵니다.
 document.addEventListener('DOMContentLoaded', function() {
   loadMemberList();
+  
+   // 삭제 버튼 클릭 시 이벤트 처리
+  var table = document.querySelector('#memberTable');
+  table.addEventListener('click', function(event) {
+    var deleteButton = event.target.closest('.btn-danger');
+    if (deleteButton) {
+      var memberId = deleteButton.dataset.memberId;
+      deleteMember(memberId);
+    }
+  });
 });
 
 
@@ -48,12 +58,7 @@ function loadMemberList() {
         var deleteButton = document.createElement('button');
         deleteButton.className = 'btn btn-danger btn-sm';
         deleteButton.textContent = '삭제';
-        
-        // 삭제 버튼을 클릭했을 때 deleteMember 함수 호출
-		deleteButton.addEventListener('click', function() {
-  		var memberId = member.member_ID; // 해당 회원의 아이디
-  		deleteMember(memberId); // deleteMember 함수 호출
-		});
+        deleteButton.dataset.memberId = member.member_id;
         
         
         deleteCell.appendChild(deleteButton);
@@ -68,8 +73,9 @@ function loadMemberList() {
 }
 
 
-//해당 member_id삭제 
+// deleteMember 함수 정의
 function deleteMember(memberId) {
+	console.log(memberId);
   // AJAX를 사용하여 POST 요청을 보냅니다.
   var xhr = new XMLHttpRequest();
   xhr.open('POST', 'deleteMember', true);
@@ -80,11 +86,11 @@ function deleteMember(memberId) {
       if (xhr.status === 200) {
         // 회원 삭제 성공 
         console.log('회원이 성공적으로 삭제되었습니다.');
-         window.location.href = "users";
+        location.reload(); 
       } else {
         // 회원 삭제 실패
         console.log('회원 삭제에 실패하였습니다.');
-       window.location.href = "users";
+        location.reload(); 
       }
     }
   };
@@ -93,5 +99,8 @@ function deleteMember(memberId) {
   var data = JSON.stringify({ member_ID: memberId });
   xhr.send(data);
 }
+
+
+
 
 

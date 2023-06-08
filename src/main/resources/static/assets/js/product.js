@@ -17,6 +17,7 @@ var formData = new FormData();
 formData.append("p_code", productCode);
 formData.append("p_name", productName);
 formData.append("p_price", productPrice);
+formData.append("p_weight", productWeight);
 formData.append("p_loc", productLocation);
 formData.append("p_img", "1");
 formData.append("imageFile", imageFile);
@@ -34,7 +35,8 @@ formData.append("imageFile", imageFile);
         // 업로드 성공 시 처리할 로직
         
         console.log("이미지 업로드 성공");
-        alert("상품 업로드");
+        alert("상품 업로드 성공");
+        
         location.reload(); 
       } else {
         // 업로드 실패 시 처리할 로직

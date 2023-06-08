@@ -12,8 +12,8 @@ public class RaspberryPiService {
 		
 		byte [] imgData = file.getBytes();
 		String fileName = file.getOriginalFilename();
-		
-		try (FileOutputStream fos = new FileOutputStream("C:\\Users\\user\\Desktop\\"+fileName)) {
+	
+		try (FileOutputStream fos = new FileOutputStream("C:\\Users\\user\\OneDrive\\"+fileName)) {
             fos.write(imgData);
             fos.flush();
             System.out.println("이미지 파일이 저장되었습니다.");

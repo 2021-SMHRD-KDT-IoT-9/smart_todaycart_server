@@ -9,4 +9,5 @@ public class ads {
 	private String t_start;
 	private String t_end;
 	private String ads_type;
+	private String ads_item;
 }
