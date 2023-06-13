@@ -14,4 +14,7 @@ public interface AndMapper {
 	public int newMember(member_info m);
 	@Select("select * from MEMBER_INFO WHERE MEMBER_ID=#{id}")
 	public member_info memberInform(String id);
+    @Insert("Insert into CART_INFO values(#{member_id},#{cart_id},NOW())")
+    public void insertCart(String member_id,String cart_id);
+
 }

@@ -20,7 +20,7 @@ public interface AndProductMapper {
 	public int InsertCallList(String id, String barcode);
 	
 	@Insert("Insert into AFTER_PRODUCT values(#{member_id},#{code},NOW())")
-	public int InsertAfterProduct(int code,String member_id);
+	public int InsertAfterProduct(String code,String member_id);
 	
    @Select("select * from  BEFORE_PRODUCT where P_NAME=#{p_name}")
     public before_product searchProduct(String p_name);

@@ -30,7 +30,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.smhrd.iot.domain.barcodeEvent;
 import com.smhrd.iot.domain.before_product;
-import com.smhrd.iot.domain.pythonResult;
 import com.smhrd.iot.domain.scanBarcode;
 import com.smhrd.iot.service.andProductService;
 
@@ -55,19 +54,28 @@ public class RasberryPiController {
 	before_product product;
 	
 	//라즈베리파이에서 읽어온 weight 다른 함수에서 비교하기 위해 전역함수 설정
-	int weightMeasure;
+	Double weightMeasure;
 	
 
-	
+	//라즈베리파이에서 카메라로 찍은 이미지 파일, 무게센서로 읽어온 무게 값 받는 코드
 	@PostMapping(value="/scan")
-	public void scanProudct(@RequestParam("img") MultipartFile file, int weight) throws IOException{
-		//weightMeasure += weight;
-		service.dataToImage(file);
+	public void scanProduct(@RequestParam("img") MultipartFile file, @RequestParam("weight") Double weight) throws IOException {
+	    try {
+	        weightMeasure = weight;
+	        service.dataToImage(file);
+	        System.out.println(weightMeasure);
+	    } catch (NullPointerException e) {
+	        // 예외 처리 로직을 추가해주세요
+	    	System.out.println("널에러");
+	        e.printStackTrace();
+	        weightMeasure=(double) 0;
+	        // 예외 발생 시에도 진행되게 하려면, 적절한 대체값이나 처리 방법을 선택하여 코드를 추가해주세요.
+	    }
 	}
-	
+
 	
 	//라즈베리파이에서 바코드를 읽은 후 해당 상품을 안드로이드로 보내는 코드
-	@GetMapping(value="/Barcode")
+	@GetMapping(value="/barcode")
 	public void getBarcode(@RequestParam("barcode") String barcode) throws Exception {
 		System.out.println("라즈베리파이에서 읽은 바코드 값 : "+barcode);
 		barcodeScan.setBarcode(barcode);

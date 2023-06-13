@@ -30,16 +30,17 @@ public class adminRestController {
 	@Autowired
 	adminService service;
 	
+	//웹 페이지 관리자 회원가입
 	@PostMapping(value="/registerCheck", consumes = "application/json")
 	public void register(@RequestBody manager m) {	
-			System.out.println("시도");
 			service.register(m);
 	}
+	//웹 페이지 회원 로그인
 	@PostMapping(value="/loginCheck" , consumes = "application/json")
 	public void login(@RequestBody manager m, HttpSession session) {
 		int cnt = service.login(m);
 		if(cnt>0) {
-			System.out.println("성공");
+		
 			session.setAttribute("loginId", m.getManager_id());
 		}
 		else {
@@ -54,6 +55,7 @@ public class adminRestController {
 	    return loginId != null ? loginId : "";
 	}
 	
+	//웹 페이지에서 가입한 회원들의 정보 열람
 	@GetMapping(value="/memberList", produces = "application/json")
 	public String showMember() throws JsonProcessingException{
 		System.out.println("컨트롤러단이 되나");
@@ -63,6 +65,7 @@ public class adminRestController {
 		    String json = objectMapper.writeValueAsString(members);
 		    return json;
 	}
+	//웹 페이지에서 가입한 회원들 정보 삭제
 	@PostMapping(value="/deleteMember")
 	public void deleteMember(@RequestBody Map<String, String> requestData) {
 	    String memberId = requestData.get("member_ID");

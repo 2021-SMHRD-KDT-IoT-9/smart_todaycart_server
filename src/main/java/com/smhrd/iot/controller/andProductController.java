@@ -37,7 +37,6 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.smhrd.iot.domain.barcodeEvent;
 import com.smhrd.iot.domain.before_product;
 import com.smhrd.iot.domain.member_info;
-import com.smhrd.iot.domain.pythonResult;
 import com.smhrd.iot.service.adsService;
 import com.smhrd.iot.service.andProductService;
 
@@ -72,13 +71,18 @@ public class andProductController {
 	//직원 호출 버튼 클릭했을 때 callList테이블에 추가(완료)
 	@RequestMapping(value="/callManager", method=RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Map<String, Object>> callManager(@RequestBody member_info m) {
-		String barcode="12345";
-		System.out.println("직원호출 시도");
-		//String barcode=barcodeScan.getBarcode();
+		
+	
+		 try {
+		        Thread.sleep(4000); // 2초 대기
+		    } catch (InterruptedException e) {
+		        e.printStackTrace();
+		    } 
+	    
+		String barcode=barcodeScan.getBarcode();
 		 Map<String, Object> response = new HashMap<>();
 		if(service.InsertCallList(m.getMember_id(), barcode)>0){
-			System.out.println(m.getMember_id());
-			System.out.println("안드로이드 직원호출 컨트롤러");
+		
 			 response.put("success", true);
 	           
 		}else {
@@ -92,16 +96,21 @@ public class andProductController {
 	//장바구니 상품 추가(완료)
 		@RequestMapping(value = "/shopingcart", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
 		public  before_product addToShoppingCart() {
-			//String barcode=barcodeScan.getBarcode();
-	    	String barcode="12345";
-	    	 System.out.println("쇼핑카트 시도");
+			 try {
+			        Thread.sleep(4000); // 2초 대기
+			    } catch (InterruptedException e) {
+			        e.printStackTrace();
+			    }
+		
+			String barcode=barcodeScan.getBarcode();
+	    	
+	  
 	    	 Map<String, Object> response = new HashMap<>();
 	    	 
 	    	if(barcode!=null) {
 	    		   pt = service.getBarcodeProduct(barcode);
 	    		 //장바구니에 들어있는 상품 정보에 맞는 광고 받아오기
-	  			
-	    			   System.out.println(pt.toString());
+	  		
 	 
 	    		   }
 	    	else {
@@ -115,64 +124,12 @@ public class andProductController {
 	    	return pt;
 	    }
 		
-		
-		/*
-		  //장바구니 상품 추가+광고 이미지 추가
-		  
-		 @RequestMapping(value = "/shopingcart", method = RequestMethod.POST) public
-		  Map<String, Object> addToShoppingCart() { //String
-		  barcode=barcodeScan.getBarcode(); String barcode="12345";
-		  System.out.println("쇼핑카트 시도"); 
-		  Map<String, Object> response = new HashMap<>();
-		  
-		  if(barcode!=null) {
-		   pt = service.getBarcodeProduct(barcode); //장바구니에 들어있는 상품정보에 맞는 광고 받아오기 
-		   List<String> adsList=adsMachine.sendProductInfo(pt);
-		   for (String adsItem :adsList) { 
-		   
-		     adsProductImg.add(adsSelect.getAdsImg(adsItem,"3")) ;
-		     }
-		  
-		  	System.out.println(pt.toString());
-		  	response.put("product",pt); 
-		  	response.put("imgList", adsProductImg);
-		  	} 
-		  
-		   else { response.put("error", "광고 이미지와 상품이 전달되지 않았습니다."); }
-		  
-		  return response; }
-		 */
 	
 	
-	  
-	   
-		  @RequestMapping(value="/payProduct", method=RequestMethod.POST, consumes="application/json") //@RequestBody ArrayList<before_product> productList
-		  public ResponseEntity<Map<String, Object>> payProduct(@RequestBody ArrayList<before_product> productList, @RequestParam String member_id) {
-		  Map<String, Object> response = new HashMap<>(); 
-		  System.out.println("결제 시도");
-		  System.out.println(productList.size());
-		     for (before_product product :productList) { 
-			    int code = product.getP_code();
-			    System.out.println(product.toString());
-			    if(service.InsertAfterProduct(code, member_id)>0) {
-					  System.out.println("결제 완료"); 
-					  response.put("success", true);
-					  response.put("message", "결제 완료"); } 
-			       else { 
-					 response.put("success", false);
-					 response.put("message","결제 실패");
-					  
-					  } } return ResponseEntity.ok(response); 
-					  }
-	
-		 
-	  
-	  
-	  
-	  
+
 	  
 		
-	/*
+	
 	
 	//결제 완료 버튼을 눌렀을 때 카메라에 찍힌 이미지와 무게 센서로 측정한 무게로 비교한 후 
 	//둘 중 하나라도 맞을 때 결제 후 결제 완료 테이블에 추가
@@ -183,7 +140,8 @@ public class andProductController {
 		if(check(controller,productList,productName)) {
 			//무게값이 같거나 이름이 전부 장바구니에 포함되어있을 때 장바구니 결제 진행
 			for (before_product product : productList) {
-				int code = product.getP_code();
+				String code = product.getP_code();
+				System.out.println(""+code);
 				 if(service.InsertAfterProduct(code, member_id)>0) {
 					 System.out.println("결제 완료");
 			           response.put("success", true);
@@ -204,25 +162,38 @@ public class andProductController {
 		}
 		//결과가 어떻게 되든 무게 센서에서 측정한 무게 값과 장바구니내 이름 리스트를 0으로 초기화
 		 productName.clear();
-		controller.weightMeasure=0;
+		controller.weightMeasure=(double) 0;
 		return ResponseEntity.ok(response);
 		
 	}
-	
-	//무게랑 이름이 같은 지 비교하는 함수
-	private boolean check(RasberryPiController controller,ArrayList<before_product> productList,ArrayList<String> productName) {
-		boolean check=false;
-		int weightSum = 0;
-		for (before_product product : productList) {
-	        weightSum += product.getP_weight();
-	        if (weightSum == controller.getWeightMeasure() || productName.contains(product.getP_name())) {
-	           check=true;
+	private boolean check(RasberryPiController controller, ArrayList<before_product> productList, ArrayList<String> productName) {
+	    System.out.println("라파에서 받은 무게 값 : " + controller.getWeightMeasure());
+	    boolean check = false;
+	    double weightSum = 0;
+	    System.out.println("결제시도1");
+	    for (before_product product : productList) {
+	    	 
+	        //무게가 같고 이미지 처리해서 받아온 상품 이름 리스트들이 안드로이드에서 받은 상품 이름 리스트와 같을 때 true
+	        if (weightSum == controller.getWeightMeasure() || containsProductName(productName, product.getP_name())) {
+	            check = true;
+	          
 	        }
-	       
 	    }
-		 return check;
+	
+	    return check;
 	}
-	*/
+
+	private boolean containsProductName(ArrayList<String> productName, String name) {
+		
+		for (String product : productName) {
+	        if (product.contains(name)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+
+	
 	  //파이썬 서버로부터 스프링 부트는 값을 받아야 한다
 	@RequestMapping(value="/deleteCheck", method=RequestMethod.POST)
 	public void deleteShopingCart(@RequestBody Map<String, Object> jsonData){
@@ -235,8 +206,6 @@ public class andProductController {
 					}
 				
 			} 
-	
-	 
 	
 
 	 //상품 검색 버튼을 눌렀을 때 

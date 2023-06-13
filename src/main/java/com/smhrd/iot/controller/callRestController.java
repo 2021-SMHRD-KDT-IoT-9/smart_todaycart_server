@@ -20,15 +20,17 @@ public class callRestController {
 	@Autowired
 	callService service;
 	
+	//웹 페이지에서 직원 호출 리스트 열람
 	@GetMapping(value="/showCallList", produces = "application/json")
 	public String  showCallList() throws JsonProcessingException{
 		 List<callList> callList = service.showCallList();
 		 	
 		    ObjectMapper objectMapper = new ObjectMapper();
 		    String json = objectMapper.writeValueAsString(callList);
-		    System.out.println("콜 리스트 컨트롤러");
 		    return json;
 	}
+	
+	//웹 페이지에서 직원 호출 리스트 중 항목 삭제
 	@PostMapping(value="/deleteCall")
 	public void deleteCall(@RequestBody Map<String, String> requestData) {
 	    String call_id = requestData.get("call_id");

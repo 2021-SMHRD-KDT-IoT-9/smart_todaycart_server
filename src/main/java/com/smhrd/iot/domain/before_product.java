@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class before_product {
-	private int p_code; 
+	private String p_code; 
 	private String p_name;
 	private int p_price;  
 	private String p_loc;
@@ -21,7 +21,7 @@ public class before_product {
 		
 	}
 	
-	public before_product(int p_code, String p_name, int p_price, String p_loc, int p_weight, String p_img) {
+	public before_product(String p_code, String p_name, int p_price, String p_loc, int p_weight, String p_img) {
 		super();
 		this.p_code = p_code;
 		this.p_name = p_name;

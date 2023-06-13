@@ -1,5 +1,7 @@
 package com.smhrd.iot.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,7 @@ public class adsService {
 		return mapper.insertImage(fileName, imageName, adsType,imageType);
 	}
 	
-	public String  getAdsImg(String ads_item,String ads_type) {
-		System.out.println("서비스단에서 광고 찾기 성공");
+	public List<String>  getAdsImg(String ads_item,String ads_type) {	
 		return mapper.getAdsImg(ads_item,ads_type);
 	}
 }

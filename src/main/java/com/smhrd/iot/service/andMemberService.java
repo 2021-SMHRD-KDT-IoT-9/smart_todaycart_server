@@ -24,5 +24,8 @@ public class andMemberService {
 	public member_info memberInform(String id) {
 		return mapper.memberInform(id);
 	}
-	
+	//로그인했을 때 카트 정보 기억하게 카트 테이블에 추가
+	 public void insertCart(String member_id,String cart_id) {
+		 mapper.insertCart(member_id, cart_id);
+	 }
 }

@@ -32,6 +32,7 @@ public class productController {
 	@Value("${upload.path}")
 	private String uploadPath;
 
+	//웹 페이지에서 상품 정보, 이미지 삽입
 	@PostMapping(value = "/insertProduct")
 	public void uploadImage(HttpServletRequest request, @RequestParam("imageFile") MultipartFile imageFile, @ModelAttribute before_product product) {
 		if (!imageFile.isEmpty()) {
@@ -67,7 +68,7 @@ public class productController {
 
 		}
 	}
-
+  
 
 	private void insertProduct(String fileName, before_product product) {
 		service.insertProduct(fileName, product);

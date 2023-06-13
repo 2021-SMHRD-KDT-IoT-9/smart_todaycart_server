@@ -18,6 +18,7 @@ public class cartRestController {
 	@Autowired
 	cartService service;
 	
+	//웹 페이지에서 카트에 대한 정보 열람 가능
 	@GetMapping(value="/showCartList", produces = "application/json")
 	public String showCartList() throws JsonProcessingException{
 		 List<cartList> cartList = service.showCartList();
